@@ -21,7 +21,7 @@ public class BindingAdapters {
 
         }
 
-    @BindingAdapter("android:src")
+    @BindingAdapter("bind:items")
     public static void listBindGridview (GridView view, Forecast forecast){
         Adapternew adapterNew = new Adapternew(forecast);
         view.setAdapter(adapterNew);

@@ -3,7 +3,9 @@ package com.example.bohdan.apixuweather;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Current {
+import java.io.Serializable;
+
+public class Current implements Serializable {
 
     @SerializedName("last_updated_epoch")
     @Expose

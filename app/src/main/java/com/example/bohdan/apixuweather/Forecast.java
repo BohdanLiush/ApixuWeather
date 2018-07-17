@@ -2,11 +2,12 @@ package com.example.bohdan.apixuweather;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Forecast {
+public class Forecast implements Serializable {
 
     @SerializedName("forecastday")
     @Expose

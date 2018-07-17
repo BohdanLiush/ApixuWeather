@@ -3,7 +3,9 @@ package com.example.bohdan.apixuweather;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Condition_ {
+import java.io.Serializable;
+
+public class Condition_ implements Serializable {
 
     @SerializedName("text")
     @Expose
