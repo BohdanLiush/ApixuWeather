@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BindingAdapters {
 
@@ -22,8 +23,8 @@ public class BindingAdapters {
         }
 
     @BindingAdapter("bind:items")
-    public static void listBindGridview (GridView view, Forecast forecast){
-        Adapternew adapterNew = new Adapternew(forecast);
+    public static void listBindGridview (GridView view, List<Forecastday> forecastday){
+        Adapternew adapterNew = new Adapternew(forecastday);
         view.setAdapter(adapterNew);
     }
 }

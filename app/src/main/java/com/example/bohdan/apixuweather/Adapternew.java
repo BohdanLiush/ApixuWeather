@@ -15,21 +15,24 @@ import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class Adapternew extends BaseAdapter {
 
-    public Forecast forecast;
     public LayoutInflater inflater;
-    public Context context;
 
-    public Adapternew(Forecast forecast)
+    public List<Forecastday> listForecastday;
+
+    public Adapternew(List<Forecastday> listForecastday)
     {
-        this.forecast = forecast;
+        this.listForecastday = listForecastday;
     }
     @Override
     public int getCount() {
-        return forecast.getForecastday().size();
+        if (listForecastday == null)
+            return 0;
+        return listForecastday.size();
     }
 
     @Override
@@ -45,35 +48,16 @@ public class Adapternew extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
 
-        /*View v;
-        if (view == null) {  // if it's not recycled, initialize some attributes
-            inflater = (LayoutInflater) viewGroup.getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE );
-            v = inflater.inflate(R.layout.custom, viewGroup, false);
-        } else {
-            v = view;
-        }
-*/
-/*
-        ImageView imageView = v.findViewById(R.id.imageView);
-        TextView tempetature = v.findViewById(R.id.textView9);
-        //TextView cloudy = v.findViewById(R.id.textView10);
-
-        tempetature.setText(String .valueOf(forecast.getForecastday().get(position).getDay().getMaxtempC()));
-        Picasso.get().load("https://"+forecast.
-                getForecastday().get(position).getDay().getCondition().getIcon()).into(imageView);
-        return v;
-*/
-
         if (inflater == null) {
             inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         CustomBinding customBinding = DataBindingUtil.inflate(inflater, R.layout.custom, viewGroup, false);
-        //customBinding.
-        long timeInMilliseconds = forecast.getForecastday().get(position).getDateEpoch();
+
+        long timeInMilliseconds = listForecastday.get(position).getDateEpoch();
 
         String forcastdayname = formatDateTime(timeInMilliseconds);
         customBinding.textView3.setText(forcastdayname);
-        customBinding.setModelFor(forecast.getForecastday().get(position));
+        customBinding.setModelFor(listForecastday.get(position));
         return customBinding.getRoot();
 
     }
