@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Cal
     public void loadFragment(){
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, firstFragment);
+        fragmentTransaction.add(R.id.frameLayout, firstFragment);
         fragmentTransaction.commit();
     }
 
@@ -67,8 +67,22 @@ public class MainActivity extends AppCompatActivity implements Serializable, Cal
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.remove(firstFragment)
-                .add(R.id.frameLayout, secondFragment,"home").addToBackStack("home").commit();
+        fragmentTransaction.replace(R.id.fragment_one, secondFragment).addToBackStack(null).commit();
+        // тут у replace стояв R.id.framelayout (перша актівіті), поміняв на R.id.fragment_one і заробила кнопка назад
+    }
+
+    @Override
+    public void callingBackButton() {
+        FragmentManager fm = getFragmentManager();
+        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStackImmediate();
+        }
+
+       /* if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        } else {
+            super.onBackPressed();
+        }*/
     }
 }
 

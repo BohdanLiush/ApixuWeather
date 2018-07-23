@@ -12,6 +12,7 @@ public class CallbackClass {
 
         void callingBackSecondFr(Forecastday listForecastday);
 
+        void callingBackButton();
 
     }
 
@@ -27,6 +28,10 @@ public class CallbackClass {
 
     void loadObjectSecondFr(Forecastday listForecastday){
         callback.callingBackSecondFr(listForecastday);
+    }
+
+    void buttonBack(){
+        callback.callingBackButton();
     }
 
 }

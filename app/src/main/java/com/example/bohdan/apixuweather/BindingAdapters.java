@@ -2,6 +2,7 @@ package com.example.bohdan.apixuweather;
 
 import android.databinding.BindingAdapter;
 import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
@@ -19,11 +20,10 @@ public class BindingAdapters {
         Picasso.get()
                 .load("https://" + string)
                 .into(view);
-
         }
 
     @BindingAdapter("bind:items")
-    public static void listBindGridview (GridView view, List<Forecastday> forecastday){
+    public static void listBindGridview (RecyclerView view, List<Forecastday> forecastday){
         Adapternew adapterNew = new Adapternew(forecastday);
         view.setAdapter(adapterNew);
     }
