@@ -21,6 +21,17 @@ public class Model implements Serializable {
     @Expose
     private Forecast forecast;
 
+    // введена буленова змінна
+    private boolean  visibleOk;
+
+    public boolean isVisibleOk() {
+        return visibleOk;
+    }
+
+    public void setVisibleOk(boolean visibleOk) {
+        this.visibleOk = visibleOk;
+    }
+    // кінець буленової змінної
 
     public Location getLocation() {
         return location;

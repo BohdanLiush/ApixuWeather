@@ -16,7 +16,6 @@ public class BindingAdapters {
 
     @BindingAdapter("android:src")
     public static void loadImage(ImageView view, String string) {
-        //Glide.with(view.getContext()).load(string).into(view);
         Picasso.get()
                 .load("https://" + string)
                 .into(view);

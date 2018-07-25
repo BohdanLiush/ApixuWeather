@@ -10,12 +10,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -29,16 +32,12 @@ public class FirstFragment extends Fragment implements Serializable {
     public Model model;
     public String s = "";
     ArrayList<String> spinnerList = new ArrayList<>();
-    GridView gridView;
-    Adapternew adapternew;
     FragmentOneBinding fragmentOneBinding;
-    public boolean visibleOk = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         fragmentOneBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_one,container,false);
-        //fragmentOneBinding.setModelFor(model);
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         fragmentOneBinding.gridListView.setLayoutManager(layoutManager);
@@ -59,23 +58,30 @@ public class FirstFragment extends Fragment implements Serializable {
 
                     try {
                         model = callbacks.loadObject(s);
-                        visibleOk = true;
 
                         if (model==null) {
-                            Toast.makeText(getActivity(), "no such town", Toast.LENGTH_SHORT).show();
+                           // model.setVisibleOk(false);
+                            Toast toast =  Toast.makeText(getActivity(), "NO SUCH TOWN", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER,10,10);
+                            LinearLayout toastcontainer = (LinearLayout) toast.getView();
+                            ImageView imageView = new ImageView(container.getContext());
+                            imageView.setImageResource(R.drawable.disxtwo);
+                            toastcontainer.addView(imageView,300,300);
+                            toast.show();
+
+
+                        }else {
+                            model.setVisibleOk(true);
+                            GradientDrawable tempCircleCurrent = (GradientDrawable) fragmentOneBinding.textView11.getBackground();
+                            int tempColor = getTemperatureColor((int) Double.parseDouble(String.valueOf(model.getCurrent().getTempC())));
+                            tempCircleCurrent.setColor(tempColor);
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
-                // так ми робим різні кольори в круглій textview в залежності від температури
-                GradientDrawable tempCircleCurrent = (GradientDrawable) fragmentOneBinding.textView11.getBackground();
-                int tempColor = getTemperatureColor((int) Double.parseDouble(String.valueOf(model.getCurrent().getTempC())));
-                tempCircleCurrent.setColor(tempColor);
-
-                    //adapternew = new Adapternew(model.getForecast().getForecastday());
                     fragmentOneBinding.setModelFor(model);
-                    //gridView.setAdapter(adapternew);
+
                 return false;
             }
 
@@ -101,19 +107,33 @@ public class FirstFragment extends Fragment implements Serializable {
         fragmentOneBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position==1){
+                if (position==0){
+                    s = "";
+                    MainActivity activityHome = (MainActivity) container.getContext();
+                    CallbackClass callbacks = new CallbackClass();
+                    callbacks.registerCallBack(activityHome);
+                    try {
+                        model = callbacks.loadObject(s);
+                       // model.setVisibleOk(true);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    fragmentOneBinding.setModelFor(model);                }
+
+                    if (position==1){
                     s = "Paris";
                     MainActivity activityHome = (MainActivity) container.getContext();
                     CallbackClass callbacks = new CallbackClass();
                     callbacks.registerCallBack(activityHome);
                     try {
                         model = callbacks.loadObject(s);
+                        model.setVisibleOk(true);
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //adapternew = new Adapternew(model.getForecast().getForecastday());
                     fragmentOneBinding.setModelFor(model);
-                    //gridView.setAdapter(adapternew);
                     GradientDrawable tempCircleCurrent = (GradientDrawable) fragmentOneBinding.textView11.getBackground();
                     int tempColor = getTemperatureColor((int) Double.parseDouble(String.valueOf(model.getCurrent().getTempC())));
                     tempCircleCurrent.setColor(tempColor);
@@ -125,16 +145,17 @@ public class FirstFragment extends Fragment implements Serializable {
                     callbacks.registerCallBack(activityHome);
                     try {
                         model = callbacks.loadObject(s);
+                        model.setVisibleOk(true);
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //adapternew = new Adapternew(model.getForecast().getForecastday());
                     fragmentOneBinding.setModelFor(model);
-                    //gridView.setAdapter(adapternew);
                     GradientDrawable tempCircleCurrent = (GradientDrawable) fragmentOneBinding.textView11.getBackground();
                     int tempColor = getTemperatureColor((int) Double.parseDouble(String.valueOf(model.getCurrent().getTempC())));
                     tempCircleCurrent.setColor(tempColor);
                 }
+
                 if (position==3){
                     s = "London";
                     MainActivity activityHome = (MainActivity) container.getContext();
@@ -142,13 +163,14 @@ public class FirstFragment extends Fragment implements Serializable {
                     callbacks.registerCallBack(activityHome);
                     try {
                         model = callbacks.loadObject(s);
+                        model.setVisibleOk(true);
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //adapternew = new Adapternew(model.getForecast().getForecastday());
                     fragmentOneBinding.setModelFor(model);
-                    //gridView.setAdapter(adapternew);
                 }
+
                 if (position==4){
                     s = "Uzhorod";
                     MainActivity activityHome = (MainActivity) container.getContext();
@@ -156,12 +178,12 @@ public class FirstFragment extends Fragment implements Serializable {
                     callbacks.registerCallBack(activityHome);
                     try {
                         model = callbacks.loadObject(s);
+                        model.setVisibleOk(true);
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //adapternew = new Adapternew(model.getForecast().getForecastday());
                     fragmentOneBinding.setModelFor(model);
-                    //gridView.setAdapter(adapternew);
                     GradientDrawable tempCircleCurrent = (GradientDrawable) fragmentOneBinding.textView11.getBackground();
                     int tempColor = getTemperatureColor((int) Double.parseDouble(String.valueOf(model.getCurrent().getTempC())));
                     tempCircleCurrent.setColor(tempColor);
@@ -174,10 +196,6 @@ public class FirstFragment extends Fragment implements Serializable {
             }
         });
 
-
-
-
-        //gridView = container.findViewById(R.id.gridListView);
         fragmentOneBinding.gridListView.addOnItemTouchListener(new RecyclerItemClickListener(container.getContext(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

@@ -70,10 +70,6 @@ public class Adapternew extends RecyclerView.Adapter<Adapternew.ViewHolder>{
 
         holder.customBinding.textView3.setText(forcastdayname);
 
-/*        GradientDrawable tempCircleCurrent = (GradientDrawable) holder.customBinding.textView9.getBackground();
-        int tempColor = getTemperatureColor((int) Double.parseDouble(String.valueOf(listForecastday.get(position).getDay().getMaxtempC())));
-        tempCircleCurrent.setColor(tempColor);*/
-
     }
 
     /*@Override
@@ -108,40 +104,5 @@ public class Adapternew extends RecyclerView.Adapter<Adapternew.ViewHolder>{
     private static String formatDateTime(long timeInMilliseconds) {
         SimpleDateFormat formatter = new SimpleDateFormat(("E"), Locale.ENGLISH);
         return formatter.format(new Date(timeInMilliseconds * 1000));
-    }
-
-    private int getTemperatureColor(int temp) {
-        int tempColorResourceId;
-
-        if (temp <= -21)
-            tempColorResourceId = R.color.tempM21;
-        else if (-20 <= temp && temp <= -16)
-            tempColorResourceId = R.color.tempM20_M16;
-        else if (-15 <= temp && temp <= -11)
-            tempColorResourceId = R.color.tempM15_M11;
-        else if (-10 <= temp && temp <= -6)
-            tempColorResourceId = R.color.tempM10_M6;
-        else if (-5 <= temp && temp <= -1)
-            tempColorResourceId = R.color.tempM5_M1;
-        else if (0 <= temp && temp <= 4)
-            tempColorResourceId = R.color.temp0_P4;
-        else if (5 <= temp && temp <= 9)
-            tempColorResourceId = R.color.tempP5_P9;
-        else if (10 <= temp && temp <= 14)
-            tempColorResourceId = R.color.tempP10_P14;
-        else if (15 <= temp && temp <= 19)
-            tempColorResourceId = R.color.tempP15_P19;
-        else if (20 <= temp && temp <= 24)
-            tempColorResourceId = R.color.tempP20_P24;
-        else if (25 <= temp && temp <= 29)
-            tempColorResourceId = R.color.tempP25_P29;
-        else if (30 <= temp && temp <= 34)
-            tempColorResourceId = R.color.tempP30_P34;
-        else if (temp >= 35)
-            tempColorResourceId = R.color.tempP35;
-        else
-            tempColorResourceId = R.color.colorAccent;
-
-        return ContextCompat.getColor(this.inflater.getContext(), tempColorResourceId);
     }
 }
