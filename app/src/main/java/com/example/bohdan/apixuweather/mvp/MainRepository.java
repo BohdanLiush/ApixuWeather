@@ -9,7 +9,6 @@ import java.util.List;
 public class MainRepository implements MainContract.Repository {
 
     NetworkManager networkManager = new NetworkManager();
-    // new
     @Override
     public Model loadModel(String s) throws InterruptedException {
         networkManager.loadStringFromMain(s);

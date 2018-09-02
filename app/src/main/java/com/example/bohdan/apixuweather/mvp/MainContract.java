@@ -10,7 +10,6 @@ public interface MainContract {
     interface View {
         void getModel(Model models);
         void bucck();
-        //new
     }
 
     interface Presenter {
