@@ -14,6 +14,7 @@
 
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/constrSecondFr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/frrrr"
@@ -175,10 +176,32 @@
             android:id="@+id/button"
             android:layout_width="70dp"
             android:layout_height="61dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="92dp"
             android:layout_marginEnd="40dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/backfour"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/button_reward"
+            android:layout_width="48dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginStart="48dp"
+            android:background="@drawable/butrew"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button_forward"
+            android:layout_width="48dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="232dp"
+            android:layout_marginRight="232dp"
+            android:background="@drawable/butfor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

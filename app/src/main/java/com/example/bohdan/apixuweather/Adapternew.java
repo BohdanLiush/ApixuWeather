@@ -17,6 +17,7 @@ import com.example.bohdan.apixuweather.databinding.CustomBinding;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -102,7 +103,15 @@ public class Adapternew extends RecyclerView.Adapter<Adapternew.ViewHolder>{
     }*/
 
     private static String formatDateTime(long timeInMilliseconds) {
+
+        String dateFormat = "dd-MM-yyyy hh:mm";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeInMilliseconds);
+        return simpleDateFormat.format(calendar.getTime());
+   /*
         SimpleDateFormat formatter = new SimpleDateFormat(("E"), Locale.ENGLISH);
-        return formatter.format(new Date(timeInMilliseconds * 1000));
+        return formatter.format(new Date(timeInMilliseconds * 1000));*/
     }
 }

@@ -23,16 +23,20 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.bohdan.apixuweather.databinding.FragmentOneBinding;
+import com.example.bohdan.apixuweather.mvp.MainContract;
+import com.example.bohdan.apixuweather.mvp.MainPresenter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FirstFragment extends Fragment implements Serializable {
+public class FirstFragment extends Fragment implements Serializable, MainContract.View {
 
     public Model model;
     public String s = "";
     ArrayList<String> spinnerList = new ArrayList<>();
     FragmentOneBinding fragmentOneBinding;
+
+    private MainContract.Presenter mPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +47,10 @@ public class FirstFragment extends Fragment implements Serializable {
         fragmentOneBinding.gridListView.setLayoutManager(layoutManager);
         fragmentOneBinding.gridListView.addItemDecoration(new DividerItemDecoration
                 (container.getContext(), DividerItemDecoration.HORIZONTAL));
+
+
+        mPresenter = new MainPresenter(this);
+
 
         fragmentOneBinding.searching.setQueryHint("Enter a city to search...");
 
@@ -57,10 +65,13 @@ public class FirstFragment extends Fragment implements Serializable {
                     callbacks.registerCallBack(activityHome);
 
                     try {
-                        model = callbacks.loadObject(s);
+
+                        mPresenter.onButtonWasClicked(s);
+                        //model = callbacks.loadObject(s);
+
 
                         if (model==null) {
-                           // model.setVisibleOk(false);
+                            // model.setVisibleOk(false);
                             Toast toast =  Toast.makeText(getActivity(), "NO SUCH TOWN", Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER,10,10);
                             LinearLayout toastcontainer = (LinearLayout) toast.getView();
@@ -68,7 +79,6 @@ public class FirstFragment extends Fragment implements Serializable {
                             imageView.setImageResource(R.drawable.disxtwo);
                             toastcontainer.addView(imageView,300,300);
                             toast.show();
-
 
                         }else {
                             model.setVisibleOk(true);
@@ -113,8 +123,10 @@ public class FirstFragment extends Fragment implements Serializable {
                     CallbackClass callbacks = new CallbackClass();
                     callbacks.registerCallBack(activityHome);
                     try {
-                        model = callbacks.loadObject(s);
-                       // model.setVisibleOk(true);
+                       // model = callbacks.loadObject(s);
+                        mPresenter.onButtonWasClicked(s);
+
+                        // model.setVisibleOk(true);
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -127,7 +139,9 @@ public class FirstFragment extends Fragment implements Serializable {
                     CallbackClass callbacks = new CallbackClass();
                     callbacks.registerCallBack(activityHome);
                     try {
-                        model = callbacks.loadObject(s);
+                        //model = callbacks.loadObject(s);
+                        mPresenter.onButtonWasClicked(s);
+
                         model.setVisibleOk(true);
 
                     } catch (InterruptedException e) {
@@ -144,7 +158,9 @@ public class FirstFragment extends Fragment implements Serializable {
                     CallbackClass callbacks = new CallbackClass();
                     callbacks.registerCallBack(activityHome);
                     try {
-                        model = callbacks.loadObject(s);
+                        //model = callbacks.loadObject(s);
+                        mPresenter.onButtonWasClicked(s);
+
                         model.setVisibleOk(true);
 
                     } catch (InterruptedException e) {
@@ -162,7 +178,9 @@ public class FirstFragment extends Fragment implements Serializable {
                     CallbackClass callbacks = new CallbackClass();
                     callbacks.registerCallBack(activityHome);
                     try {
-                        model = callbacks.loadObject(s);
+                        //model = callbacks.loadObject(s);
+                        mPresenter.onButtonWasClicked(s);
+
                         model.setVisibleOk(true);
 
                     } catch (InterruptedException e) {
@@ -177,7 +195,9 @@ public class FirstFragment extends Fragment implements Serializable {
                     CallbackClass callbacks = new CallbackClass();
                     callbacks.registerCallBack(activityHome);
                     try {
-                        model = callbacks.loadObject(s);
+                        // model = callbacks.loadObject(s);
+                        mPresenter.onButtonWasClicked(s);
+
                         model.setVisibleOk(true);
 
                     } catch (InterruptedException e) {
@@ -202,7 +222,9 @@ public class FirstFragment extends Fragment implements Serializable {
                 MainActivity activityHome = (MainActivity) view.getContext();
                 CallbackClass callbacks = new CallbackClass();
                 callbacks.registerCallBack(activityHome);
-                callbacks.loadObjectSecondFr(model.getForecast().getForecastday().get(position));
+                callbacks.loadObjectSecondFr(model.getForecast().getForecastday(),position);
+
+                // callbacks.loadObjectSecondFr(model.getForecast().getForecastday().get(position)); - було так
             }
         }));
 
@@ -260,4 +282,13 @@ public class FirstFragment extends Fragment implements Serializable {
         return ContextCompat.getColor(this.getActivity(), tempColorResourceId);
     }
 
+    @Override
+    public void getModel(Model models) {
+        model = models;
+    }
+
+    @Override
+    public void bucck() {
+
+    }
 }

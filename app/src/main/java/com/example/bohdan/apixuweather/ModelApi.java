@@ -10,4 +10,6 @@ public interface ModelApi {
     @GET("forecast.json?key=7178efb6c8324f3da44185408180507&days=5")
     Call<Model> idsInfo(@Query("q") String number);
 
+
+
 }

@@ -10,7 +10,7 @@ public class CallbackClass {
 
         Model callingBack(String string) throws InterruptedException;
 
-        void callingBackSecondFr(Forecastday listForecastday);
+        void callingBackSecondFr(List<Forecastday> listForecastday, int position);
 
         void callingBackButton();
 
@@ -26,8 +26,8 @@ public class CallbackClass {
         return callback.callingBack(string);
     }
 
-    void loadObjectSecondFr(Forecastday listForecastday){
-        callback.callingBackSecondFr(listForecastday);
+    void loadObjectSecondFr(List<Forecastday> listForecastday, int position){
+        callback.callingBackSecondFr(listForecastday, position);
     }
 
     void buttonBack(){

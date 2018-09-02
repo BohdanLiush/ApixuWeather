@@ -59,30 +59,28 @@ public class MainActivity extends AppCompatActivity implements Serializable, Cal
     }
 
     @Override
-    public void callingBackSecondFr(Forecastday listForecastday) {
+    public void callingBackSecondFr(List<Forecastday> listForecastday, int position) {
 
-        Bundle arguments = new Bundle();
-        arguments.putSerializable("listForCastDay", listForecastday);
-        secondFragment.setArguments(arguments);
+        /*Bundle arguments = new Bundle();
+        arguments.putSerializable("listForCastDay", (Serializable) listForecastday);
+        secondFragment.setArguments(arguments);*/
+
+        Bundle argumentstwo = new Bundle();
+        argumentstwo.putSerializable("ForCastDay", (Serializable) listForecastday);
+        argumentstwo.putSerializable("position", position);
+
+        secondFragment.setArguments(argumentstwo);
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, secondFragment).addToBackStack(null).commit();
-        /** тут у replace стояв R.id.framelayout (перша актівіті), поміняв на R.id.fragment_one і заробила кнопка назад*/
+
     }
 
     @Override
     public void callingBackButton() {
         FragmentManager fm = getFragmentManager();
-        //for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
             fm.popBackStack();
-       // }
-
-       /* if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        } else {
-            super.onBackPressed();
-        }*/
     }
 }
 
