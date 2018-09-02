@@ -17,7 +17,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.View mView;
     private MainContract.Repository mRepository;
-
+// new
     Model listModel;
     SecondFragment secondFragment = new SecondFragment();
     String message;
